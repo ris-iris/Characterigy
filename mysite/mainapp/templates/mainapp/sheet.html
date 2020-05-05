@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character sheet</title>
+</head>
+<body>
+<div>
+    <table border="1" style="border:1px solid #000000;)">
+	<tbody>
+		<tr>
+			<td rowspan="5" width="12.5%">{{character.lvl}}</td>
+			<td colspan="3" rowspan="3">{{character.name}}</td>
+			<td colspan="2" rowspan="2">{{character.chrclass}}</td>
+			<td colspan="2" rowspan="2">{{character.player}}</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2">{{character.race}}</td>
+			<td colspan="2" rowspan="2">{{character.get_align_display}}</td>
+		</tr>
+		<tr>
+			<td>{{character.exp}}</td>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">saves</td>
+			<td rowspan="3">{{character.armor_class}}</td>
+			<td rowspan="3">{{character.temp_hit}}</td>
+			<td rowspan="3">{{hits.dice}}</td>
+			<td colspan="2">death saves</td>
+		</tr>
+		<tr>
+			<td rowspan="3">prof bonus</td>
+			<td>str</td>
+			<td>{% if "str" in saving_throw %}
+				{{mod.str}}
+				{% endif %}
+			</td>
+			<td colspan="2" rowspan="2">checkbutotns</td>
+		</tr>
+		<tr>
+			<td>dex</td>
+			<td>{% if "dex" in saving_throw %}
+				{{mod.dex}}
+				{% endif %}</td>
+		</tr>
+		<tr>
+			<td>con</td>
+			<td>{% if "con" in saving_throw %}
+				{{mod.con}}
+				{% endif %}</td>
+			<td rowspan="3">{{mod.dex}}</td>
+			<td colspan="2" rowspan="3">temp hits</td>
+			<td colspan="2" rowspan="3">short time hits</td>
+		</tr>
+		<tr>
+			<td>{{character.strength}}</td>
+			<td>int</td>
+			<td>{% if "int" in saving_throw %}
+				{{mod.int}}
+				{% endif %}</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.str}}</td>
+			<td>wis</td>
+			<td>{% if "wis" in saving_throw %}
+				{{mod.wis}}
+				{% endif %}</td>
+		</tr>
+		<tr>
+			<td>char</td>
+			<td>{% if "char" in saving_throw %}
+				{{mod.char}}
+				{% endif %}</td>
+			<td rowspan="3">{{character.race.speed}}</td>
+			<td colspan="4" rowspan="2">weapon</td>
+		</tr>
+		<tr>
+			<td>{{character.dexterity}}</td>
+			<td>acrobatics</td>
+			<td>
+				{% if character.acrobatic %}
+				{{mod.dex}}
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.dex}}</td>
+			<td>animal_handling</td>
+			<td>{% if character.animal_handling %}
+				{{mod.wis}}
+				{% endif %}</td>
+			<td colspan="2">name</td>
+			<td colspan="2">damage</td>
+		</tr>
+		<tr>
+			<td>arcana</td>
+			<td>{% if character.arcana %}
+				{{mod.int}}
+				{% endif %}</td>
+			<td rowspan="3">{{character.race.get_size_display}}</td>
+			<td colspan="2">{{character.weapon1}}</td>
+			<td>{{character.damage1}}</td>
+			<td>{{character.damagetype1}}</td>
+		</tr>
+		<tr>
+			<td>{{character.constitution}}</td>
+			<td>athletics</td>
+			<td>{% if character.athletics %}
+				{{mod.str}}
+				{% endif %}</td>
+			<td colspan="2">{{character.weapon2}}</td>
+			<td>{{character.damage2}}</td>
+			<td>{{character.damagetype2}}</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.con}}</td>
+			<td>deception</td>
+			<td>{% if character.deception %}
+				{{mod.char}}
+				{% endif %}</td>
+			<td colspan="2">{{character.weapon3}}</td>
+			<td>{{character.damage3}}</td>
+			<td>{{character.damagetype3}}</td>
+		</tr>
+		<tr>
+			<td>history</td>
+			<td>{% if character.history %}
+				{{mod.int}}
+				{% endif %}</td>
+			<td rowspan="4"></td>
+			<td colspan="5" rowspan="4">{{character.additional}}</td>
+
+		</tr>
+		<tr>
+			<td>{{character.intelligence}}</td>
+			<td>insight</td>
+			<td>{% if character.insight %}
+				{{mod.wis}}
+				{% endif %}</td>
+
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.int}}</td>
+			<td>intimidation</td>
+			<td>{% if character.intimidation %}
+				{{mod.char}}
+				{% endif %}</td>
+		</tr>
+		<tr>
+			<td>investigation</td>
+			<td>{% if character.investigation %}
+				{{mod.int}}
+				{% endif %}</td>
+
+		</tr>
+		<tr>
+			<td>{{character.wisdom}}</td>
+			<td>medicine</td>
+			<td>{% if character.medicine %}
+				{{mod.wis}}
+				{% endif %}</td>
+			<td colspan="5">using</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.wis}}</td>
+			<td>nature</td>
+			<td>{% if character.nature %}
+				{{mod.int}}
+				{% endif %}</td>
+			<td>armor</td>
+			<td colspan="4" rowspan="2">{{armor}}</td>
+		</tr>
+		<tr>
+			<td>perception</td>
+			<td>{% if character.perception %}
+				{{mod.wis}}
+				{% endif %}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>{{character.charisma}}</td>
+			<td>performance</td>
+			<td>{% if character.performance %}
+				{{mod.char}}
+				{% endif %}</td>
+			<td>weapon</td>
+			<td colspan="4" rowspan="2">{{weapon}}</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{mod.char}}</td>
+			<td>persuasion</td>
+			<td>{% if character.persuasion %}
+				{{mod.char}}
+				{% endif %}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>religion</td>
+			<td>{% if character.religion %}
+				{{mod.int}}
+				{% endif %}</td>
+			<td>tools</td>
+			<td colspan="4" rowspan="2">{{tools}}</td>
+		</tr>
+		<tr>
+			<td rowspan="3">pas wis</td>
+			<td>sleight_of_hand</td>
+			<td>{% if character.sleight_of_hand %}
+				{{mod.dex}}
+				{% endif %}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>stealth</td>
+			<td>{% if character.sleight_of_hand %}
+				{{mod.dex}}
+				{% endif %}</td>
+			<td>langs</td>
+			<td colspan="4" rowspan="2">{{langs}}</td>
+		</tr>
+		<tr>
+			<td>survival</td>
+			<td>{% if character.athletics %}
+				{{mod.wis}}
+				{% endif %}</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4">equipment</td>
+			<td colspan="4">special features</td>
+		</tr>
+		<tr>
+			<td rowspan="2">{{character.goldCoins}}</td>
+			<td colspan="3" rowspan="12">{{character.equipment}}</td>
+			<td colspan="7" rowspan="20" width="50%">
+				<ul>
+					{% for str in class_special_features%}
+						<li>{{str}}</li>
+					{% endfor %}
+				</ul>
+				<ul>
+					{% for str in race_special_features%}
+						<li>{{str}}</li>
+					{% endfor %}
+				</ul>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td rowspan="2">{{character.silverCoins}}</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td rowspan="2">{{character.copperCoins}}</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td rowspan="6">&nbsp;</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td colspan="2">traits</td>
+			<td colspan="2">ideals</td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="3">{{character.traits}}</td>
+			<td colspan="2" rowspan="3">{{character.ideals}}</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td colspan="2">bonds</td>
+			<td colspan="2">flaws</td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="3">{{character.bonds}}</td>
+			<td colspan="2" rowspan="3">{{character.flaws}}</td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+	</tbody>
+</table>
+</div>
+<hr>
+<div>
+    <table>
+        <tr><th>История персонажа</th></tr>
+        <tr><td>{{character.backstory}}</td></tr>
+    </table>
+<hr>
+    <table>
+        <tr><th>Союзники и организации</th></tr>
+        <tr><td>{{character.organizations}}</td></tr>
+    </table>
+</div>
+<hr>
+    <table>
+        <tr><th>Дополнительные умения</th></tr>
+        <tr><td>{{character.additional}}</td></tr>
+    </table>
+<hr>
+    <table>
+        <tr><th>Сокровища</th></tr>
+        <tr><td>{{character.treasure}}</td></tr>
+    </table>
+</div>
+<hr>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{user.username}}</title>
+</head>
+<body>
+<p align="center">{{user.username}}'s characters:</p>
+<hr>
+{% if characters_list %}
+    <ul>
+    {% for character in characters_list %}
+        <li><a href="character/{{ character.id }}/">{{ character.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No characters are available.</p>
+{% endif %}
+<form action="/users/{{user.id}}/edit/" method="get">
+{% csrf_token %}
+<input type="submit" value="Create new character">
+</form>
+</body>
+</html>
