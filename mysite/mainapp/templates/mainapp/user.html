@@ -16,7 +16,7 @@
 {% else %}
     <p>No characters are available.</p>
 {% endif %}
-<form action="/users/{{user.id}}/edit/" method="get">
+<form action="/{{user.id}}/edit/" method="get">
 {% csrf_token %}
 <input type="submit" value="Create new character">
 </form>

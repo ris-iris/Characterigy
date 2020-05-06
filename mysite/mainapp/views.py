@@ -2,6 +2,7 @@ import math
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template import loader
@@ -46,7 +47,7 @@ def log_in(request):
         form = LoginForm()
     return render(request, 'mainapp/login.html', {'form': form})
 
-
+@login_required
 def user(request, user_id):
     temp_user = User.objects.get(pk=user_id)
     template = loader.get_template('mainapp/user.html')
@@ -87,19 +88,40 @@ def chracter_data_pack(character_id):
 
     return context
 
-
+@login_required
 def character(request, user_id, character_id):
     template = loader.get_template('mainapp/sheet.html')
     context = chracter_data_pack(character_id)
     return HttpResponse(template.render(context, request))
 
 
+def increase(temp_character):
+    temp_increase = eval(temp_character.race.characteristic_increase)
+    if 'str' in temp_increase:
+        temp_character.strength += int(temp_increase['str'])
+    elif 'dex' in temp_increase:
+        temp_character.strength += int(temp_increase['dex'])
+    elif 'con' in temp_increase:
+        temp_character.strength += int(temp_increase['con'])
+    elif 'int' in temp_increase:
+        temp_character.strength += int(temp_increase['int'])
+    elif 'wis' in temp_increase:
+        temp_character.strength += int(temp_increase['wis'])
+    elif 'char' in temp_increase:
+        temp_character.strength += int(temp_increase['char'])
+    for skill in dir(temp_character):
+        if skill in temp_increase['skills']:
+            setattr(temp_character, skill, True)
+
+
+@login_required
 def create_character(request, user_id):
     template = loader.get_template('mainapp/create.html')
     form = ModCharForm(request.POST or None)
     if form.is_valid():
         temp_character = form.save(commit=False)
         temp_character.player = User.objects.get(pk=user_id)
+        increase(temp_character)
         temp_character.save()
         return redirect('user', user_id)
     else:
