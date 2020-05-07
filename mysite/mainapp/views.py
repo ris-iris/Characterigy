@@ -12,6 +12,12 @@ from .models import User, Character
 from .forms import LoginForm, ModCharForm, SigninForm
 
 
+def user_check(request, user_id):
+    if request.user.id != user_id:
+        return False
+    return True
+
+
 def signin(request):
     if request.method == 'POST':
         user_form = SigninForm(request.POST)
@@ -47,8 +53,11 @@ def log_in(request):
         form = LoginForm()
     return render(request, 'mainapp/login.html', {'form': form})
 
-@login_required
+
+@login_required(login_url='')
 def user(request, user_id):
+    if not user_check(request, user_id):
+        return redirect('user', request.user.id)
     temp_user = User.objects.get(pk=user_id)
     template = loader.get_template('mainapp/user.html')
     context = {
@@ -88,8 +97,11 @@ def chracter_data_pack(character_id):
 
     return context
 
-@login_required
+
+@login_required(login_url='')
 def character(request, user_id, character_id):
+    if not user_check(request, user_id):
+        return redirect('user', request.user.id)
     template = loader.get_template('mainapp/sheet.html')
     context = chracter_data_pack(character_id)
     return HttpResponse(template.render(context, request))
@@ -114,8 +126,10 @@ def increase(temp_character):
             setattr(temp_character, skill, True)
 
 
-@login_required
+@login_required(login_url='')
 def create_character(request, user_id):
+    if not user_check(request, user_id):
+        return redirect('user', request.user.id)
     template = loader.get_template('mainapp/create.html')
     form = ModCharForm(request.POST or None)
     if form.is_valid():
