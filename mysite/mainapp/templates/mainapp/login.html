@@ -2,16 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>title</title>
+    <style>
+        table {
+            background-image: url("../../static/bor.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            height: 345px;
+        }
+
+        a {
+            font-size: large;
+            text-decoration: none;
+            color: #2E3434;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+        a:hover {
+            color: #5C7A9A;
+        }
+    </style>
 </head>
 <body>
-<form method="post"> {%csrf_token%}
-  {{form.as_p}}
-    <input type="submit" value="Log In">
-    <a href="/users/sign_in/">Sign In</a>
-</form>
+<table width="45%" align="center">
+    <tr>
+        <td align="center">
+            <form method="post"> {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" value="Войти">
+                <a href="sign_in/">Зарегистрироваться</a>
+            </form>
+        </td>
+    </tr>
+</table>
+
 {% for message in messages %}
-            <div>{{ message }}</div>
+<div>{{ message }}</div>
 {% endfor %}
 </body>
 </html>

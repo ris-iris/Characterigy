@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{user.username}}</title>
-</head>
-<body>
-<p align="center">{{user.username}}'s characters:</p>
-<hr>
+{% extends 'base.html' %}
+{% block main %}
 {% if characters_list %}
     <ul>
     {% for character in characters_list %}
@@ -16,9 +9,4 @@
 {% else %}
     <p>No characters are available.</p>
 {% endif %}
-<form action="/{{user.id}}/edit/" method="get">
-{% csrf_token %}
-<input type="submit" value="Create new character">
-</form>
-</body>
-</html>
+{% endblock %}

@@ -12,6 +12,11 @@ from .models import User, Character
 from .forms import LoginForm, ModCharForm, SigninForm
 
 
+def first_page(request):
+    template = loader.get_template('mainapp/firstpage.html')
+    return HttpResponse(template.render({}, request))
+
+
 def user_check(request, user_id):
     if request.user.id != user_id:
         return False
@@ -54,7 +59,7 @@ def log_in(request):
     return render(request, 'mainapp/login.html', {'form': form})
 
 
-@login_required(login_url='')
+@login_required(login_url='/login')
 def user(request, user_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)
@@ -67,7 +72,7 @@ def user(request, user_id):
     return HttpResponse(template.render(context, request))
 
 
-def chracter_data_pack(character_id):
+def character_data_pack(character_id):
     temp_character = Character.objects.get(pk=character_id)
 
     context = {
@@ -98,12 +103,12 @@ def chracter_data_pack(character_id):
     return context
 
 
-@login_required(login_url='')
+@login_required(login_url='/login')
 def character(request, user_id, character_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)
     template = loader.get_template('mainapp/sheet.html')
-    context = chracter_data_pack(character_id)
+    context = character_data_pack(character_id)
     return HttpResponse(template.render(context, request))
 
 
@@ -126,7 +131,7 @@ def increase(temp_character):
             setattr(temp_character, skill, True)
 
 
-@login_required(login_url='')
+@login_required(login_url='/login')
 def create_character(request, user_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)

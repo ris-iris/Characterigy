@@ -7,13 +7,23 @@
 <body>
 <form method="post">{%csrf_token%}
 <div>
+    {% if form.errors %}
+        <div id="form_errors">
+            {% for key, value in form.errors.items %}
+                <span>
+                    {{ key }}:{{ value }}
+                </span>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <table border="1" style="border:1px solid #000000;">
 	<tbody>
 		<tr>
 			<td rowspan="5" width="12.5%">{{form.lvl}}</td>
 			<td colspan="3" rowspan="3">{{form.name}}</td>
 			<td colspan="2" rowspan="2">{{form.chrclass}}</td>
-			<td colspan="2" rowspan="2">{{player.name}}</td>
+			<td colspan="2" rowspan="2">{{player.username}}</td>
 		</tr>
 		<tr>
 		</tr>
