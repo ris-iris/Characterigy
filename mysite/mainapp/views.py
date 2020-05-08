@@ -59,7 +59,7 @@ def log_in(request):
     return render(request, 'mainapp/login.html', {'form': form})
 
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
 def user(request, user_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)
@@ -103,7 +103,7 @@ def character_data_pack(character_id):
     return context
 
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
 def character(request, user_id, character_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)
@@ -131,7 +131,7 @@ def increase(temp_character):
             setattr(temp_character, skill, True)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='login')
 def create_character(request, user_id):
     if not user_check(request, user_id):
         return redirect('user', request.user.id)
