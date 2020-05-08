@@ -3,287 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <title>Character sheet</title>
+    <style>
+        body {
+            font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+            color: #2E3434;;
+        }
+    </style>
 </head>
 <body>
 <form method="post">{%csrf_token%}
-<div>
-    {% if form.errors %}
+    <div>
+        {% if form.errors %}
         <div id="form_errors">
             {% for key, value in form.errors.items %}
-                <span>
+            <span>
                     {{ key }}:{{ value }}
                 </span>
             {% endfor %}
         </div>
-    {% endif %}
+        {% endif %}
 
-    <table border="1" style="border:1px solid #000000;">
-	<tbody>
-		<tr>
-			<td rowspan="5" width="12.5%">{{form.lvl}}</td>
-			<td colspan="3" rowspan="3">{{form.name}}</td>
-			<td colspan="2" rowspan="2">{{form.chrclass}}</td>
-			<td colspan="2" rowspan="2">{{player.username}}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td colspan="2" rowspan="2">{{form.race}}</td>
-			<td colspan="2" rowspan="2">{{form.align}}</td>
-		</tr>
-		<tr>
-			<td>{{form.exp}}</td>
-			<td colspan="2">&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="2">saves</td>
-			<td rowspan="3">{{form.armor_class}}</td>
-			<td rowspan="3">{{form.temp_hit}}</td>
-			<td rowspan="3">hits dice</td>
-			<td colspan="2">death saves</td>
-		</tr>
-		<tr>
-			<td rowspan="3">prof bonus</td>
-			<td>str</td>
-			<td>mod str</td>
-			<td colspan="2" rowspan="2">checkbutotns</td>
-		</tr>
-		<tr>
-			<td>dex</td>
-			<td>mod dex</td>
-		</tr>
-		<tr>
-			<td>con</td>
-			<td>mod con</td>
-			<td rowspan="3">init</td>
-			<td colspan="2" rowspan="3">temp hits</td>
-			<td colspan="2" rowspan="3">short time hits</td>
-		</tr>
-		<tr>
-			<td>{{form.strength}}</td>
-			<td>int</td>
-			<td>mod int</td>
-		</tr>
-		<tr>
-			<td rowspan="2">mod.str</td>
-			<td>wis</td>
-			<td>mod wis</td>
-		</tr>
-		<tr>
-			<td>char</td>
-			<td>mod char</td>
-			<td rowspan="3">speed</td>
-			<td colspan="4" rowspan="2">weapon</td>
-		</tr>
-		<tr>
-			<td>{{form.dexterity}}</td>
-			<td>acrobatics</td>
-			<td>{{form.acrobatic}}</td>
-		</tr>
-		<tr>
-			<td rowspan="2">mod.dex</td>
-			<td>animal_handling</td>
-			<td>{{form.animal_handling}}</td>
-			<td colspan="2">name</td>
-			<td colspan="2">damage</td>
-		</tr>
-		<tr>
-			<td>arcana</td>
-			<td>{{form.arcana}}</td>
-			<td rowspan="3">size</td>
-			<td colspan="2">{{form.weapon1}}</td>
-			<td>{{form.damage1}}</td>
-			<td>{{form.damagetype1}}</td>
-		</tr>
-		<tr>
-			<td>{{form.constitution}}</td>
-			<td>athletics</td>
-			<td>{{form.athletics}}</td>
-			<td colspan="2">{{form.weapon2}}</td>
-			<td>{{form.damage2}}</td>
-			<td>{{form.damagetype2}}</td>
-		</tr>
-		<tr>
-			<td rowspan="2">mod.con</td>
-			<td>deception</td>
-			<td>{{form.deception}}</td>
-			<td colspan="2">{{form.weapon3}}</td>
-			<td>{{form.damage3}}</td>
-			<td>{{form.damagetype3}}</td>
-		</tr>
-		<tr>
-			<td>history</td>
-			<td>{{form.history}}</td>
-			<td rowspan="4"></td>
-			<td colspan="5" rowspan="4">{{form.additional}}</td>
+        <table border="1" style="border:1px solid #000000;">
+            <tbody>
+            <tr>
+                <td rowspan="5" width="12.5%">lvl: {{form.lvl}}</td>
+                <td colspan="3" rowspan="3">{{form.name}}</td>
+                <td colspan="2" rowspan="2">{{form.chrclass}}</td>
+                <td colspan="2" rowspan="2">{{player.username}}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="2">{{form.race}}</td>
+                <td colspan="2" rowspan="2">{{form.align}}</td>
+            </tr>
+            <tr>
+                <td>exp: {{form.exp}}</td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">saves</td>
+                <td rowspan="3">AC: {{form.armor_class}}</td>
+                <td rowspan="3">Max hp: {{form.temp_hit}}</td>
+                <td rowspan="3">hits dice</td>
+                <td colspan="2">death saves</td>
+            </tr>
+            <tr>
+                <td rowspan="3">prof bonus</td>
+                <td>str</td>
+                <td>mod str</td>
+                <td colspan="2" rowspan="2">
+                    <p>success: </p>
+                    <p>failure: </p>
+                </td>
+            </tr>
+            <tr>
+                <td>dex</td>
+                <td>mod dex</td>
+            </tr>
+            <tr>
+                <td>con</td>
+                <td>mod con</td>
+                <td rowspan="3">init</td>
+                <td colspan="2" rowspan="3">temp hits</td>
+                <td colspan="2" rowspan="3">short time hits</td>
+            </tr>
+            <tr>
+                <td>str: {{form.strength}}</td>
+                <td>int</td>
+                <td>mod int</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.str</td>
+                <td>wis</td>
+                <td>mod wis</td>
+            </tr>
+            <tr>
+                <td>char</td>
+                <td>mod char</td>
+                <td rowspan="3">speed</td>
+                <td colspan="4" rowspan="2">weapon</td>
+            </tr>
+            <tr>
+                <td>dex: {{form.dexterity}}</td>
+                <td>acrobatics</td>
+                <td>{{form.acrobatic}}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.dex</td>
+                <td>animal_handling</td>
+                <td>{{form.animal_handling}}</td>
+                <td colspan="2">name</td>
+                <td colspan="2">damage</td>
+            </tr>
+            <tr>
+                <td>arcana</td>
+                <td>{{form.arcana}}</td>
+                <td rowspan="3">size</td>
+                <td colspan="2">{{form.weapon1}}</td>
+                <td>{{form.damage1}}</td>
+                <td>{{form.damagetype1}}</td>
+            </tr>
+            <tr>
+                <td>con: {{form.constitution}}</td>
+                <td>athletics</td>
+                <td>{{form.athletics}}</td>
+                <td colspan="2">{{form.weapon2}}</td>
+                <td>{{form.damage2}}</td>
+                <td>{{form.damagetype2}}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.con</td>
+                <td>deception</td>
+                <td>{{form.deception}}</td>
+                <td colspan="2">{{form.weapon3}}</td>
+                <td>{{form.damage3}}</td>
+                <td>{{form.damagetype3}}</td>
+            </tr>
+            <tr>
+                <td>history</td>
+                <td>{{form.history}}</td>
+                <td rowspan="4"></td>
+                <td colspan="5" rowspan="4">{{form.additional}}</td>
 
-		</tr>
-		<tr>
-			<td>{{form.intelligence}}</td>
-			<td>insight</td>
-			<td>{{form.insight}}</td>
+            </tr>
+            <tr>
+                <td>int: {{form.intelligence}}</td>
+                <td>insight</td>
+                <td>{{form.insight}}</td>
 
-		</tr>
-		<tr>
-			<td rowspan="2">mod.int</td>
-			<td>intimidation</td>
-			<td>{{form.intimidation}}</td>
-		</tr>
-		<tr>
-			<td>investigation</td>
-			<td>{{form.investigation}}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.int</td>
+                <td>intimidation</td>
+                <td>{{form.intimidation}}</td>
+            </tr>
+            <tr>
+                <td>investigation</td>
+                <td>{{form.investigation}}</td>
 
-		</tr>
-		<tr>
-			<td>{{form.wisdom}}</td>
-			<td>medicine</td>
-			<td>{{form.medicine}}</td>
-			<td colspan="5">using</td>
-		</tr>
-		<tr>
-			<td rowspan="2">mod.wis</td>
-			<td>nature</td>
-			<td>{{form.nature}}</td>
-			<td>armor</td>
-			<td colspan="4" rowspan="2">{{armor}}</td>
-		</tr>
-		<tr>
-			<td>perception</td>
-			<td>{{form.perception}}</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>{{form.charisma}}</td>
-			<td>performance</td>
-			<td>{{form.performance}}</td>
-			<td>weapon</td>
-			<td colspan="4" rowspan="2">{{weapon}}</td>
-		</tr>
-		<tr>
-			<td rowspan="2">mod.char</td>
-			<td>persuasion</td>
-			<td>{{form.persuasion}}</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>religion</td>
-			<td>{{form.religion}}</td>
-			<td>tools</td>
-			<td colspan="4" rowspan="2">{{tools}}</td>
-		</tr>
-		<tr>
-			<td rowspan="3">pas wis</td>
-			<td>sleight_of_hand</td>
-			<td>{{form.sleight_of_hand}}</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>stealth</td>
-			<td>{{form.stealth}}</td>
-			<td>langs</td>
-			<td colspan="4" rowspan="2">{{langs}}</td>
-		</tr>
-		<tr>
-			<td>survival</td>
-			<td>{{form.survival}}</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="4">equipment</td>
-			<td colspan="4">special features</td>
-		</tr>
-		<tr>
-			<td rowspan="2">{{form.goldCoins}}</td>
-			<td colspan="3" rowspan="12">{{form.equipment}}</td>
-			<td colspan="7" rowspan="20" width="50%">
-				<ul>
-					{% for str in class_special_features%}
-						<li>{{str}}</li>
-					{% endfor %}
-				</ul>
-				<ul>
-					{% for str in race_special_features%}
-						<li>{{str}}</li>
-					{% endfor %}
-				</ul>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td rowspan="2">{{form.silverCoins}}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td rowspan="2">{{form.copperCoins}}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td rowspan="6">&nbsp;</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td colspan="2">traits</td>
-			<td colspan="2">ideals</td>
-		</tr>
-		<tr>
-			<td colspan="2" rowspan="3">{{form.traits}}</td>
-			<td colspan="2" rowspan="3">{{form.ideals}}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td colspan="2">bonds</td>
-			<td colspan="2">flaws</td>
-		</tr>
-		<tr>
-			<td colspan="2" rowspan="3">{{form.bonds}}</td>
-			<td colspan="2" rowspan="3">{{form.flaws}}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-	</tbody>
-</table>
-</div>
-<hr>
-<div>
+            </tr>
+            <tr>
+                <td>wis: {{form.wisdom}}</td>
+                <td>medicine</td>
+                <td>{{form.medicine}}</td>
+                <td colspan="5">using</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.wis</td>
+                <td>nature</td>
+                <td>{{form.nature}}</td>
+                <td>armor</td>
+                <td colspan="4" rowspan="2">{{armor}}</td>
+            </tr>
+            <tr>
+                <td>perception</td>
+                <td>{{form.perception}}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>char: {{form.charisma}}</td>
+                <td>performance</td>
+                <td>{{form.performance}}</td>
+                <td>weapon</td>
+                <td colspan="4" rowspan="2">{{weapon}}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">mod.char</td>
+                <td>persuasion</td>
+                <td>{{form.persuasion}}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>religion</td>
+                <td>{{form.religion}}</td>
+                <td>tools</td>
+                <td colspan="4" rowspan="2">{{tools}}</td>
+            </tr>
+            <tr>
+                <td rowspan="3">pas wis</td>
+                <td>sleight_of_hand</td>
+                <td>{{form.sleight_of_hand}}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>stealth</td>
+                <td>{{form.stealth}}</td>
+                <td>langs</td>
+                <td colspan="4" rowspan="2">{{langs}}</td>
+            </tr>
+            <tr>
+                <td>survival</td>
+                <td>{{form.survival}}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">equipment</td>
+                <td colspan="4">special features</td>
+            </tr>
+            <tr>
+                <td rowspan="2">gc: {{form.goldCoins}}</td>
+                <td colspan="3" rowspan="12">{{form.equipment}}</td>
+                <td colspan="7" rowspan="20" width="50%">
+                    <ul>
+                        {% for str in class_special_features%}
+                        <li>{{str}}</li>
+                        {% endfor %}
+                    </ul>
+                    <ul>
+                        {% for str in race_special_features%}
+                        <li>{{str}}</li>
+                        {% endfor %}
+                    </ul>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td rowspan="2">sc: {{form.silverCoins}}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td rowspan="2">cc: {{form.copperCoins}}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td rowspan="6">&nbsp;</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2">traits</td>
+                <td colspan="2">ideals</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3">{{form.traits}}</td>
+                <td colspan="2" rowspan="3">{{form.ideals}}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2">bonds</td>
+                <td colspan="2">flaws</td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3">{{form.bonds}}</td>
+                <td colspan="2" rowspan="3">{{form.flaws}}</td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <table>
+            <tr>
+                <th>История персонажа</th>
+            </tr>
+            <tr>
+                <td>{{form.backstory}}</td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <th>Союзники и организации</th>
+            </tr>
+            <tr>
+                <td>{{form.organizations}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
     <table>
-        <tr><th>История персонажа</th></tr>
-        <tr><td>{{form.backstory}}</td></tr>
+        <tr>
+            <th>Дополнительные умения</th>
+        </tr>
+        <tr>
+            <td>{{form.additional}}</td>
+        </tr>
     </table>
-<hr>
+    <hr>
     <table>
-        <tr><th>Союзники и организации</th></tr>
-        <tr><td>{{form.organizations}}</td></tr>
+        <tr>
+            <th>Сокровища</th>
+        </tr>
+        <tr>
+            <td>{{form.treasure}}</td>
+        </tr>
     </table>
-</div>
-<hr>
-    <table>
-        <tr><th>Дополнительные умения</th></tr>
-        <tr><td>{{form.additional}}</td></tr>
-    </table>
-<hr>
-    <table>
-        <tr><th>Сокровища</th></tr>
-        <tr><td>{{form.treasure}}</td></tr>
-    </table>
-</div>
-<hr>
-  <input type="submit" value="Save">  
+    </div>
+    <hr>
+    <input type="submit" value="Save">
 </form>
 </body>
 </html>

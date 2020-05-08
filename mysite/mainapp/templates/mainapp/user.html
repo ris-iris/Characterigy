@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {% block main %}
+<style>
+        li {
+        list-style-type: none;
+        padding-bottom: 15px;
+        align-items: center;
+    }
+    ul {
+        text-align: center;
+    }
+</style>
 {% if characters_list %}
     <ul>
     {% for character in characters_list %}
