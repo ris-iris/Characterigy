@@ -25,7 +25,7 @@ SECRET_KEY = '356b@7scnag(er$ba6gp!&3p$mm&eh@%d#@p(7l+r^$%dt6@4_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["51.15.97.72"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'dndchardb',
-        'NAME': 'postgres',
+        # here enter name, user and password for your data base
+        'NAME': 'dndchardb',
         'USER': 'postgres',
-        #'PASSWORD': 'meowmeow',
-        'PASSWORD': 'meow',
+        'PASSWORD': 'meowmeow',
+
         'HOST': 'localhost',
         'PORT': '5432',
     }
