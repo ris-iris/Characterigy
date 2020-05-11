@@ -30,7 +30,7 @@ sudo adduser dndchardb
 sudo -u postgres createdb dndchardb
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'meowmeow';"
 ```
-то их нужно изменить и в [настройках](/mysite/mysite/settings.py) (81 - 83 строчка)
+то их нужно изменить и в настройках (/mysite/mysite/settings.py, 81 - 83 строчка)
 Запускаем проект
 ```shellscript
 python3 manage.py runserver
