@@ -1,5 +1,6 @@
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 from .forms import ModCharForm
 from .models import ChrClass, Race, Character, User
@@ -157,9 +158,9 @@ class UserTest(TestCase):
         )
         character1 = Character.objects.create(
             name='name1',
-            player=User.objects.get(pk=1),
+            player=User.objects.get(username='testuser1'),
             chrclass=ChrClass.objects.get(pk=1),
-            race=ChrClass.objects.get(pk=1),
+            race=Race.objects.get(pk=1),
             align='CG',
             lvl=1, exp=0, temp_hit=0, armor_class=0,
             strength=1, dexterity=2, constitution=3,
@@ -171,9 +172,9 @@ class UserTest(TestCase):
         )
         character2 = Character.objects.create(
             name='name2',
-            player=User.objects.get(pk=2),
+            player=User.objects.get(username='testuser1'),
             chrclass=ChrClass.objects.get(pk=1),
-            race=ChrClass.objects.get(pk=1),
+            race=Race.objects.get(pk=1),
             align='CG',
             lvl=1, exp=0, temp_hit=0, armor_class=0,
             strength=1, dexterity=2, constitution=3,
@@ -185,11 +186,13 @@ class UserTest(TestCase):
         )
 
     def test_redirect_if_not_logged_in(self):
-        resp = self.client.get(reverse('user', 1))
-        self.assertRedirects(resp, '/')
+        resp = self.client.get(reverse_lazy('user', args=[
+            User.objects.get(username='testuser1').id]))
+        self.assertRedirects(resp, '/login?next=/3/')
 
     def test_logged_in_uses_correct_template(self):
         login = self.client.login(username='testuser1', password='12345')
-        resp = self.client.get(reverse('user', 1))
+        resp = self.client.get(reverse_lazy('user', args=[
+            User.objects.get(username='testuser1').id]))
         self.assertEqual(str(resp.context['user']), 'testuser1')
         self.assertEqual(resp.status_code, 200)
