@@ -28,10 +28,23 @@
 <body>
 <table width="100%">
     <tr>
-        <td align="left"><a href="/{{user.id}}">МОИ ПЕРСОНАЖИ </a></td>
-        <td align="left"><a href="/{{user.id}}/edit/">СОЗДАТЬ</a></td>
+        <td align="left">
+            {% if user.id%}
+            <a href="/{{user.id}}">МОИ ПЕРСОНАЖИ </a>
+            {%else%}
+            <a href="/login">МОИ ПЕРСОНАЖИ</a>
+            {%endif%}
+        </td>
+        <td align="left">
+            {% if user.id%}
+            <a href="/{{user.id}}/edit/">СОЗДАТЬ</a>
+            {%else%}
+            <a href="/login">СОЗДАТЬ</a>
+            {%endif%}
+        </td>
         <td width="25%"></td>
         <td align="right"><a href="/login">ВОЙТИ/ЗАРЕГИСТРИРОВАТЬСЯ</a></td>
+        <td align="right"><a href="/logout">ВЫЙТИ</a></td>
     </tr>
 </table>
 <div align="center">
