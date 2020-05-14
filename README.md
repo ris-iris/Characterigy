@@ -34,5 +34,7 @@ sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with passw
 
 Запускаем проект
 ```shellscript
+python3 manage.py makemigrations
+python3 manage.py migrate
 python3 manage.py runserver
 ```
