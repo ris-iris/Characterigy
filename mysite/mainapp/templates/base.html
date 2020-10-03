@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Characteregy</title>
+</head>
+<style>
+    body{
+        font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+        color: #2E3434;;
+    }
+    p {
+        color: #2E3434;
+    }
+
+    a {
+        font-size: large;
+        text-decoration: none;
+        color: #2E3434;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    a:hover {
+        color: #5C7A9A;
+    }
+</style>
+<body>
+<table width="100%">
+    <tr>
+        <td align="left">
+            {% if user.id%}
+            <a href="/{{user.id}}">МОИ ПЕРСОНАЖИ </a>
+            {%else%}
+            <a href="/login">МОИ ПЕРСОНАЖИ</a>
+            {%endif%}
+        </td>
+        <td align="left">
+            {% if user.id%}
+            <a href="/{{user.id}}/edit/">СОЗДАТЬ</a>
+            {%else%}
+            <a href="/login">СОЗДАТЬ</a>
+            {%endif%}
+        </td>
+        <td width="25%"></td>
+        <td align="right"><a href="/login">ВОЙТИ/ЗАРЕГИСТРИРОВАТЬСЯ</a></td>
+        <td align="right"><a href="/logout">ВЫЙТИ</a></td>
+    </tr>
+</table>
+<div align="center">
+    {% load static %}
+    <img src="{% static 'divider-03.svg'%}" width="70%">
+</div>
+{% block main %}
+{% endblock %}
+</body>
+</html>
